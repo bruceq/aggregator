@@ -1,5 +1,8 @@
 package com.aggregator.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -12,6 +15,8 @@ import java.util.Date;
 @Table(name = "news")
 public class News {
     //唯一标识，主键，自增
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //标题
@@ -27,7 +32,7 @@ public class News {
     private String content;
 
     //创建时间
-    private Date create;
+    private String time;
 
     //是否含有图片（没有0，有1）
     private Integer image_flag;
@@ -78,12 +83,12 @@ public class News {
         this.content = content;
     }
 
-    public Date getCreate() {
-        return create;
+    public String getCreate() {
+        return time;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreate(String time) {
+        this.time = time;
     }
 
     public Integer getImage_flag() {
