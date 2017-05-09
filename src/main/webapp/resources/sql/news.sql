@@ -26,7 +26,7 @@ CREATE TABLE `news` (
   `type` varchar(20) DEFAULT NULL COMMENT '类型',
   `content` text COMMENT '正文',
   `time` text COMMENT '创建时间',
-  `image_flag` int(11) DEFAULT NULL COMMENT '是否含有图片（没有0，有1）',
+  `image_url` text COMMENT '图片地址',
   `link_flag` int(11) DEFAULT NULL COMMENT '是否含有相关链接（没有0，有1）',
   `url` text COMMENT 'url地址',
   `extro_1` text COMMENT '备用字段1',

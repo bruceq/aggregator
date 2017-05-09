@@ -3,6 +3,7 @@ package com.aggregator.controller;
 import com.aggregator.base.AggregatorBaseController;
 import com.aggregator.crawler.processor.GuanchaProcessor;
 import com.aggregator.model.News;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,15 +24,13 @@ public class AggregatorController extends AggregatorBaseController {
 
     /**
      * 测试接口，爬取【观察网】新闻
-     * @return
      */
     @RequestMapping(value = "/test", method = {RequestMethod.POST, RequestMethod.GET})
-    public String test(){
+    public void test(){
         Spider.create(new GuanchaProcessor())
                 .addUrl("http://www.guancha.cn/")
                 .addPipeline(mysqlPipeline)
                 .run();
-        return "";
     }
 
     /**

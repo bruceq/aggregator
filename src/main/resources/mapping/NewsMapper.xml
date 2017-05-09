@@ -8,12 +8,12 @@
         <result column="type" property="type" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="VARCHAR"/>
-        <result column="image_flag" property="imageFlag" jdbcType="BIGINT"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
         <result column="link_flag" property="linkFlag" jdbcType="BIGINT"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, author, type, content, time, image_flag AS imageFlag, link_flag AS linkFlag, url
+        id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url
     </sql>
 
 </mapper>

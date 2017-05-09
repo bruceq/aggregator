@@ -86,11 +86,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="home.html">Home</a></li>
-                            <!--<li><a href="sports.html">Sports</a></li>
-                            <li><a href="shortcodes.html">Health</a></li>
-                            <li><a href="fashion.html">Fashion</a></li>
-                            <li><a href="technology.html">Technology</a></li>-->
+                            <li class="active"><a href="home.html">观察者网</a></li>
+                            <li><a href="#">网易新闻</a></li>
+                            <li><a href="#">腾讯新闻</a></li>
+                            <li><a href="#">今日头条</a></li>
+                            <li><a href="#">花边头条</a></li>
                             <div class="clearfix"></div>
                         </ul>
                         <div class="search">
@@ -127,53 +127,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="wrap">
         <div class="col-md-8 content-left">
             <div class="articles">
-                <header>
-                    <h3 class="title-head">All around the world</h3>
-                </header>
-                <div class="article">
-                    <div class="article-left">
-                        <a href="#"><img src="images/article1.jpg"></a>
-                    </div>
-                    <div class="article-right">
-                        <div class="article-title">
-                            <p>On Feb 25, 2015 <a class="span_link" href="#"><span
-                                    class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span
-                                    class="glyphicon glyphicon-eye-open"></span>104 </a><a class="span_link"
-                                                                                           href="#"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span>52</a></p>
-                            <a class="title" href="single.html"> The section of the mass media industry that focuses on
-                                presenting</a>
-                        </div>
-                        <div class="article-text">
-                            <p>The standard chunk of Lorem Ipsum used since the 1500s. Sections 1.10.32 and 1.10.33 from
-                                "de Finibus Bonorum et Malorum" exact original.....</p>
-                            <a href="single.html"><img src="images/more.png" alt=""/></a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </div>
         </div>
-        <div class="col-md-4 side-bar">
-            <div class="secound_half">
-                <div class="tags">
-                    <header>
-                        <h3 class="title-head">Tags</h3>
-                    </header>
-                    <p>
-                        <a class="tag1" href="single.html">At vero eos</a>
-                        <a class="tag2" href="single.html">doloremque</a>
-                        <a class="tag3" href="single.html">On the other</a>
-                        <a class="tag4" href="single.html">pain was</a>
-                        <a class="tag5" href="single.html">rationally encounter</a>
-                    </p>
-                </div>
+    </div>
+    <div class="col-md-4 side-bar">
+        <div class="secound_half">
+            <div class="tags">
+                <header>
+                    <h3 class="title-head">Tags</h3>
+                </header>
+                <p>
+                    <a class="tag1" href="single.html">At vero eos</a>
+                    <a class="tag2" href="single.html">doloremque</a>
+                    <a class="tag3" href="single.html">On the other</a>
+                    <a class="tag4" href="single.html">pain was</a>
+                    <a class="tag5" href="single.html">rationally encounter</a>
+                </p>
             </div>
-            <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
     </div>
+    <div class="clearfix"></div>
+</div>
 </div>
 <!-- content-section-ends-here -->
 <!-- footer-section-starts-here -->
@@ -259,22 +234,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer-section-ends-here -->
 <script type="text/javascript">
     $(document).ready(function () {
-//        $(".title-head").click(function () {
-//            alert("1111")
-//            $.get("/aggregator/getNews",
-//                function (data) {
-//                    text = data
-//                    alert("2222");
-//                }, 'json');
-//        })
-        $(".article-text").click(function () {
-            alert("1111")
-            $.get("/aggregator/getNews",
-                function (data) {
-                    text = data
-                    alert("2222");
-                }, 'json');
-        })
+        $.get("/aggregator/getNews",
+            function (data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    var title = data[i].title;
+                    var content = data[i].content.substr(0, 120) + "...";
+                    var type = data[i].type;
+                    var time = data[i].create;
+                    var url = data[i].url
+                    var img = data[i].image_url.split(",")[0];
+                    html += /*"<header>" +
+                        "<h3 class='title-head'>" + type + "</h3>" +
+                        "</header>" +*/
+                        "<div class='item'>" +
+                        "<div class='article-left'>" +
+                        "<a href='#'><img src=" + img + "></a>" +
+                        "</div>" +
+                        "<div class='article-right'>" +
+                        "<div class='article-title'>" +
+                        "<p>" + time + "</p>" +
+                        "<a class='title' href=" + url + ">" + title + "</a>" +
+                        "</div>" +
+                        "<div class='article-text'>" +
+                        "<p>" + content + "</p>" +
+                        "</div>" +
+                        "</div></div>";
+                }
+                $(".articles").html(html);
+            }, 'json');
         $().UItoTop({easingType: 'easeOutQuart'});
     });
 </script>

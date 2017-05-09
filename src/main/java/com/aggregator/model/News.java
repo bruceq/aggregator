@@ -35,7 +35,7 @@ public class News {
     private String time;
 
     //是否含有图片（没有0，有1）
-    private Integer image_flag;
+    private String image_url;
 
     //是否含有相关链接（没有0，有1）
     private Integer link_flag;
@@ -91,12 +91,12 @@ public class News {
         this.time = time;
     }
 
-    public Integer getImage_flag() {
-        return image_flag;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImage_flag(Integer image_flag) {
-        this.image_flag = image_flag;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public Integer getLink_flag() {

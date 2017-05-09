@@ -7,7 +7,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +14,9 @@ import java.util.List;
  * @create 2017-05-05 17:02
  **/
 public class GuanchaProcessor implements PageProcessor {
+    //配置请求参数
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(3000)
             .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36");
-
-    private List<News> newsList = new ArrayList<>();
 
     @Override
     public void process(Page page) {
@@ -27,9 +25,9 @@ public class GuanchaProcessor implements PageProcessor {
             page.addTargetRequests(urls);
         } else {
             //正文&标题
-            String title = "" + page.getHtml().getDocument().title().replace("'","");
+            String title = "" + page.getHtml().getDocument().title().replace("'", "");
             page.putField("title", title);
-            List<String> contents = page.getHtml().xpath("//div[@class='content all-txt']/p/text()").all();
+            List<String> contents = page.getHtml().xpath("//div[@class='content all-txt']/p/allText()").all();
             StringBuffer text = new StringBuffer();
             for (String content : contents) {
                 text.append("    " + content + "\n");
@@ -37,9 +35,10 @@ public class GuanchaProcessor implements PageProcessor {
             page.putField("text", text);
 
             //正文图片
-            Integer image_flag = 0;
-            if (null != page.getHtml().xpath("//div[@class='content all-txt']/p/img/@src")) {
-                image_flag = 1;
+            List<String> img_urls = page.getHtml().xpath("//div[@class='content all-txt']/p/img/@src").all();
+            StringBuilder img_url = new StringBuilder();
+            for (String img : img_urls) {
+                img_url.append(img + ",");
             }
 
             //url链接
@@ -89,8 +88,8 @@ public class GuanchaProcessor implements PageProcessor {
             news.setType(type);
             news.setUrl(url);
             news.setLink_flag(link_flag);
-            news.setImage_flag(image_flag);
-            page.putField("news",news);
+            news.setImage_url(img_url.toString());
+            page.putField("news", news);
         }
     }
 
@@ -102,8 +101,8 @@ public class GuanchaProcessor implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new GuanchaProcessor())
-                .addUrl("http://www.guancha.cn/")
-//                .addUrl("http://www.guancha.cn/LiShiMo/2017_05_05_406929.shtml")
+//                .addUrl("http://www.guancha.cn/")
+                .addUrl("http://www.guancha.cn/WangXiangSui/2017_05_09_407337.shtml")
 //                .addUrl("http://www.guancha.cn/local/2017_05_05_406844.shtml")
 //                .addPipeline(new ConsolePipeline())
                 .addPipeline(new MysqlPipeline())
