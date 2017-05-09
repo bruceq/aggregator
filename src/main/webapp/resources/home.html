@@ -127,6 +127,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="wrap">
         <div class="col-md-8 content-left">
             <div class="articles">
+                <header>
+                    <h3 class='title-head'>观察者网</h3>
+                </header>
+                <div class="item">
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -134,14 +141,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="secound_half">
             <div class="tags">
                 <header>
-                    <h3 class="title-head">Tags</h3>
+                    <h3 class="title-head">标签</h3>
                 </header>
-                <p>
-                    <a class="tag1" href="single.html">At vero eos</a>
-                    <a class="tag2" href="single.html">doloremque</a>
-                    <a class="tag3" href="single.html">On the other</a>
-                    <a class="tag4" href="single.html">pain was</a>
-                    <a class="tag5" href="single.html">rationally encounter</a>
+                <p class="item">
                 </p>
             </div>
         </div>
@@ -236,7 +238,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(document).ready(function () {
         $.get("/aggregator/getNews",
             function (data) {
-                var html = "";
+                var article = "";
+                var keywords = "";
                 for (var i = 0; i < data.length; i++) {
                     var title = data[i].title;
                     var content = data[i].content.substr(0, 120) + "...";
@@ -244,9 +247,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     var time = data[i].create;
                     var url = data[i].url
                     var img = data[i].image_url.split(",")[0];
-                    html += /*"<header>" +
-                        "<h3 class='title-head'>" + type + "</h3>" +
-                        "</header>" +*/
+                    for (var j = 0; j < data[i].keyword.split(" ").length; j++) {
+                        var keyword = data[i].keyword.split(" ")[j];
+                        if ("" != keyword) {
+                            keywords += "<a class='tag' href='#'>" + keyword + "&nbsp;&nbsp;&nbsp;&nbsp;" + "</a>";
+                        }
+                    }
+                    article += /*"<header>" +
+                     "<h3 class='title-head'>" + type + "</h3>" +
+                     "</header>" +*/
                         "<div class='item'>" +
                         "<div class='article-left'>" +
                         "<a href='#'><img src=" + img + "></a>" +
@@ -261,7 +270,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         "</div>" +
                         "</div></div>";
                 }
-                $(".articles").html(html);
+                $(".articles .item").html(article);
+                $(".tags .item").html(keywords);
             }, 'json');
         $().UItoTop({easingType: 'easeOutQuart'});
     });

@@ -29,6 +29,7 @@ public class AggregatorController extends AggregatorBaseController {
     public void test(){
         Spider.create(new GuanchaProcessor())
                 .addUrl("http://www.guancha.cn/")
+                .thread(5)
                 .addPipeline(mysqlPipeline)
                 .run();
     }

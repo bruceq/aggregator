@@ -29,7 +29,7 @@ CREATE TABLE `news` (
   `image_url` text COMMENT '图片地址',
   `link_flag` int(11) DEFAULT NULL COMMENT '是否含有相关链接（没有0，有1）',
   `url` text COMMENT 'url地址',
-  `extro_1` text COMMENT '备用字段1',
+  `keyword` text COMMENT '关键字',
   `extro_2` text COMMENT '备用字段2',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;

@@ -11,9 +11,10 @@
         <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
         <result column="link_flag" property="linkFlag" jdbcType="BIGINT"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="keyword" property="keyword" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url
+        id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url, keyword
     </sql>
 
 </mapper>

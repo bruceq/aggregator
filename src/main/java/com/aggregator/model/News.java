@@ -43,6 +43,9 @@ public class News {
     //url地址
     private String url;
 
+    //关键字
+    private String keyword;
+
     public Long getId() {
         return id;
     }
@@ -113,5 +116,13 @@ public class News {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }
