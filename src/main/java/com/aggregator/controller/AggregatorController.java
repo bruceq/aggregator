@@ -11,6 +11,7 @@ import us.codecraft.webmagic.Spider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * videoIn搜索功能
@@ -26,7 +27,7 @@ public class AggregatorController extends AggregatorBaseController {
      * 测试接口，爬取【观察网】新闻
      */
     @RequestMapping(value = "/test", method = {RequestMethod.POST, RequestMethod.GET})
-    public void test(){
+    public void test() {
         Spider.create(new GuanchaProcessor())
                 .addUrl("http://www.guancha.cn/")
                 .thread(5)
@@ -40,11 +41,13 @@ public class AggregatorController extends AggregatorBaseController {
      * @return newsList（新闻集合）
      */
     @RequestMapping(value = "/getNews", method = {RequestMethod.POST, RequestMethod.GET})
-    public List<News> getNews(){
+    public List<News> getNews() {
         List<News> newsList = new ArrayList<>();
         List<News> newss = newsService.selectAll();
-        for(int i=0;i<5;i++){
-            newsList.add(newss.get(i));
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            Integer index = random.nextInt(newsService.selectAll().size()) - 1;
+            newsList.add(newss.get(index));
         }
         return newsList;
     }

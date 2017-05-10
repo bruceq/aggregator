@@ -90,7 +90,9 @@ public class GuanchaProcessor implements PageProcessor {
             news.setLink_flag(link_flag);
             news.setImage_url(img_url.toString());
             news.setKeyword(keywords.toString());
-            page.putField("news", news);
+            if (null != img_url.toString() && "" != img_url.toString()) {
+                page.putField("news", news);
+            }
         }
     }
 
