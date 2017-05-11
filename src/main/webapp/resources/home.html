@@ -159,12 +159,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="wrap">
         <div class="col-md-8 content-left">
             <div class="slider">
-                <div class="callbacks_wrap">
-                    <ul class="rslides" id="slider">
+                <div class="callbacks_wrap" style="width: 100%;height: 300px;">
+                    <ul class="rslides" id="slider" style="width: 100%;height: 100%;">
                     </ul>
                 </div>
             </div>
-
+            <style type="text/css">
+                /*.callbacks_img {*/
+                    /*width: 100%;*/
+                    /*height: auto;*/
+                /*}*/
+            </style>
             <script type="text/javascript">
                 $(document).ready(function () {
                     $.get("/aggregator/getNews",
@@ -175,7 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 var img = data[i].image_url.split(",")[0];
                                 var url = data[i].url
                                 slider += "<li>" +
-                                    "<img src='" + img + "' height='300' width='600'>" +
+                                    "<img src='" + img + "' class='callbacks_img'>" +
                                     "<div class='caption'>" +
                                     "<a href='" + url + "' target='view_window'>" + title + "</a>" +
                                     "</div>" +
