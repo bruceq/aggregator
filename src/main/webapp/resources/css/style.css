@@ -792,28 +792,54 @@ a.span_link:hover {
     min-height: 200px;
 }
 
-.life-style header {
+.internation-style header {
     border-bottom: 1px solid #84754e;
     padding-bottom: 4px;
 }
 
-.life-style-left-grid {
+.internation-style-left-grid {
     float: left;
     width: 48%;
     margin-right: 4%;
 }
 
-.life-style-left-grid img, .life-style-right-grid img {
+.internation-style-left-grid img, .internation-style-right-grid img {
     width: 100%;
     margin-bottom: 1em;
 }
 
-.life-style-right-grid {
+.internation-style-right-grid {
     float: left;
     width: 48%;
 }
 
-.life-style-grids {
+.internation-style-grids {
+    margin-top: 2em;
+}
+
+
+.internation-style header {
+    border-bottom: 1px solid #84754e;
+    padding-bottom: 4px;
+}
+
+.internation-style-left-grid {
+    float: left;
+    width: 48%;
+    margin-right: 4%;
+}
+
+.internation-style-left-grid img, .internation-style-right-grid img {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.internation-style-right-grid {
+    float: left;
+    width: 48%;
+}
+
+.internation-style-grids {
     margin-top: 2em;
 }
 

@@ -185,10 +185,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h3 class='title-head'>观察者网</h3>
                 </header>
                 <div class="item">
-
                 </div>
-
             </div>
+            <div class="internation-style">
+                <header>
+                    <h3 class="title-head">国际</h3>
+                </header>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $.get("/aggregator/getNews",
+                        function (data) {
+                            var internation = ""
+                            for (var i = 0; i < data.length; i++) {
+                                var title = data[i].title;
+                                var url = data[i].url;
+                                var img = data[i].image_url.split(",")[0];
+                                if (data.length % 2 == 0) {
+                                    internation += "<div class='internation-style-grids'>" +
+                                        "<div class='internation-style-left-grid'>" +
+                                        "<a href='single.html'><img src='images/l1.jpg' alt=''/></a>" +
+                                        "<a class='title' href='single.html'>It is a long established fact that a reader will be" +
+                                        "distracted.</a>" +
+                                        "</div>" +
+                                        "<div class='internation-style-right-grid'>" +
+                                        "<a href='single.html'><img src='images/l2.jpg' alt=''/></a>" +
+                                        "<a class='title' href='single.html'>There are many variations of passages of Lorem Ipsum" +
+                                        "available.</a>" +
+                                        "</div>" +
+                                        "<div class='clearfix'></div></div>";
+                                }
+                            }
+                            $(".internation-style").html(internation);
+                        }, 'json');
+                });
+            </script>
+
         </div>
         <div class="col-md-4 side-bar">
             <div class="first_half">
