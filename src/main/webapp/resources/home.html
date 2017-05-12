@@ -120,23 +120,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="marquee">
         </div>
         <div class="clearfix"></div>
-        <script>
-            $(document).ready(function () {
-                $.post("/aggregator/getNews",
-                    {
-                        type: "首页"
-                    },
-                    function (data) {
-                        var move_text = "";
-                        for (var i = 0; i < 2; i++) {
-                            var title = data[i].title;
-                            var url = data[i].url
-                            move_text += "<div class='marquee" + (i + 1) + "'><a class='breaking' href=" + url + " target='view_window'>>>" + title + "</a></div>"
-                        }
-                        $(".js-marquee").html(move_text);
-                    }, 'json');
-            });
-        </script>
         <script type="text/javascript" src="js/jquery.marquee.min.js">
 
         </script>
@@ -156,36 +139,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $.post("/aggregator/getNews",
-                        {
-                            type: "首页"
-                        },
-                        function (data) {
-                            var slider = "";
-                            for (var i = 0; i < 5; i++) {
-                                var title = data[i].title;
-                                var img = data[i].imageUrl.split(",")[0];
-                                var url = data[i].url
-                                slider += "<li>" +
-                                    "<img src='" + img + "' class='callbacks_img'>" +
-                                    "<div class='caption'>" +
-                                    "<a href='" + url + "' target='view_window'>" + title + "</a>" +
-                                    "</div>" +
-                                    "</li>";
-                            }
-                            $("#slider").html(slider);
-                            $("#slider").responsiveSlides({
-                                auto: true,
-                                nav: true,
-                                speed: 500,
-                                namespace: "callbacks",
-                                pager: true,
-                            });
-                        }, 'json');
-                });
-            </script>
             <div class="articles">
                 <header>
                     <h3 class='title-head'>观察者网</h3>
@@ -531,6 +484,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             function (data) {
                 var article = "";
                 var keywords = "";
+                var move_text = "";
+                var slider = "";
                 for (var i = 5; i < 10; i++) {
                     var title = data[i].title;
                     var content = data[i].content.substr(0, 100) + "...";
@@ -559,8 +514,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         "</div><div class='clearfix'></div>" +
                         "</div>";
                 }
+                for (var i = 0; i < 5; i++) {
+                    var title = data[i].title;
+                    var url = data[i].url;
+                    var img = data[i].imageUrl.split(",")[0];
+                    move_text += "<div class='marquee" + (i + 1) + "'><a class='breaking' href=" + url + " target='view_window'>>>" + title + "</a></div>"
+                    slider += "<li>" +
+                        "<img src='" + img + "' class='callbacks_img'>" +
+                        "<div class='caption'>" +
+                        "<a href='" + url + "' target='view_window'>" + title + "</a>" +
+                        "</div>" +
+                        "</li>";
+                }
                 $(".articles .item").html(article);
                 $(".tags .item").html(keywords);
+                $(".js-marquee").html(move_text);
+                $("#slider").html(slider);
+                $("#slider").responsiveSlides({
+                    auto: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    pager: true,
+                });
             }, 'json');
         $().UItoTop({easingType: 'easeOutQuart'});
     });
