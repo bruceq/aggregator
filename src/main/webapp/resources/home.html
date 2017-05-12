@@ -191,36 +191,161 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <header>
                     <h3 class="title-head">国际</h3>
                 </header>
+                <div class="internation-item"></div>
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
                     $.get("/aggregator/getNews",
                         function (data) {
                             var internation = ""
-                            for (var i = 0; i < data.length; i++) {
+                            for (var i = 0; i < data.length; i = i + 2) {
                                 var title = data[i].title;
                                 var url = data[i].url;
                                 var img = data[i].image_url.split(",")[0];
-                                if (data.length % 2 == 0) {
+                                if (i % 2 == 0 && i < (data.length - 1)) {
                                     internation += "<div class='internation-style-grids'>" +
                                         "<div class='internation-style-left-grid'>" +
-                                        "<a href='single.html'><img src='images/l1.jpg' alt=''/></a>" +
-                                        "<a class='title' href='single.html'>It is a long established fact that a reader will be" +
-                                        "distracted.</a>" +
+                                        "<a href='" + url + "' target='view_window'><img src='" + img + "' alt=''  style='height: 300px;'/></a>" +
+                                        "<a class='title' href='" + url + "' target='view_window'>" + title + "</a>" +
                                         "</div>" +
                                         "<div class='internation-style-right-grid'>" +
-                                        "<a href='single.html'><img src='images/l2.jpg' alt=''/></a>" +
-                                        "<a class='title' href='single.html'>There are many variations of passages of Lorem Ipsum" +
-                                        "available.</a>" +
+                                        "<a href='" + data[i + 1].url + "' target='view_window'><img src='" + data[i + 1].image_url.split(",")[0] + "' alt=''  style='height: 300px;'/></a>" +
+                                        "<a class='title' href='" + data[i + 1].url + "' target='view_window'>" + data[i + 1].title + "</a>" +
                                         "</div>" +
                                         "<div class='clearfix'></div></div>";
                                 }
                             }
-                            $(".internation-style").html(internation);
+                            $(".internation-item").html(internation);
                         }, 'json');
                 });
             </script>
-
+            <div class="sports-top">
+                <div class="s-grid-left">
+                    <div class="cricket">
+                        <header>
+                            <h3 class="title-head">财经</h3>
+                        </header>
+                        <div class="c-sports-main">
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $.get("/aggregator/getNews",
+                                    function (data) {
+                                        var c_sports_main = ""
+                                        for (var i = 0; i < 1; i++) {
+                                            var title = data[i].title;
+                                            var url = data[i].url;
+                                            var img = data[i].image_url.split(",")[0];
+                                            var time = data[i].create;
+                                            c_sports_main += " <div class='c-image'>" +
+                                                "<a href='" + url + "' target='view_window'><img  src='" + img + "' alt='' style='height: 150px;'/></a>" +
+                                                "</div>" +
+                                                "<div class='c-text'>" +
+                                                "<a class='power' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                                "<p class='date'>" + time + "</p>" +
+                                                "<a class='reu' href='" + url + "' target='view_window'><img src='images/more.png' alt=''/></a>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>" +
+                                                "<div class='clearfix'></div>";
+                                        }
+                                        $(".s-grid-left .cricket .c-sports-main").html(c_sports_main);
+                                    }, 'json');
+                            });
+                        </script>
+                        <div class="item"></div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $.get("/aggregator/getNews",
+                                    function (data) {
+                                        var s_grid_small = ""
+                                        for (var i = 0; i < 3; i++) {
+                                            var title = data[i].title;
+                                            var url = data[i].url;
+                                            var img = data[i].image_url.split(",")[0];
+                                            var time = data[i].create;
+                                            s_grid_small += "  <div class='s-grid-small'>" +
+                                                "<div class='sc-image'>" +
+                                                "<a href='" + url + "' target='view_window'><img src='" + img + "' alt='' style='height: 120px;'/></a>" +
+                                                "</div>" +
+                                                "<div class='sc-text'>" +
+                                                "<a class='power' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                                "<p class='date'>" + time + "</p>" +
+                                                "<a class='reu' href='" + url + "' target='view_window'><img src='images/more.png' alt=''/></a>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>";
+                                        }
+                                        $(".s-grid-left .cricket .item").html(s_grid_small);
+                                    }, 'json');
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="s-grid-right">
+                    <div class="cricket">
+                        <header>
+                            <h3 class="title-popular">科技</h3>
+                        </header>
+                        <div class="c-sports-main">
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $.get("/aggregator/getNews",
+                                    function (data) {
+                                        var c_sports_main = ""
+                                        for (var i = 0; i < 1; i++) {
+                                            var title = data[i].title;
+                                            var url = data[i].url;
+                                            var img = data[i].image_url.split(",")[0];
+                                            var time = data[i].create;
+                                            c_sports_main += " <div class='c-image'>" +
+                                                "<a href='" + url + "' target='view_window'><img  src='" + img + "' alt='' style='height: 150px;'/></a>" +
+                                                "</div>" +
+                                                "<div class='c-text'>" +
+                                                "<a class='power' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                                "<p class='date'>" + time + "</p>" +
+                                                "<a class='reu' href='" + url + "' target='view_window'><img src='images/more.png' alt=''/></a>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>" +
+                                                "<div class='clearfix'></div>";
+                                        }
+                                        $(".s-grid-right .cricket .c-sports-main").html(c_sports_main);
+                                    }, 'json');
+                            });
+                        </script>
+                        <div class="item"></div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $.get("/aggregator/getNews",
+                                    function (data) {
+                                        var s_grid_small = ""
+                                        for (var i = 0; i < 3; i++) {
+                                            var title = data[i].title;
+                                            var url = data[i].url;
+                                            var img = data[i].image_url.split(",")[0];
+                                            var time = data[i].create;
+                                            s_grid_small += "  <div class='s-grid-small'>" +
+                                                "<div class='sc-image'>" +
+                                                "<a href='" + url + "' target='view_window'><img src='" + img + "' alt='' style='height: 120px;'/></a>" +
+                                                "</div>" +
+                                                "<div class='sc-text'>" +
+                                                "<a class='power' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                                "<p class='date'>" + time + "</p>" +
+                                                "<a class='reu' href='" + url + "' target='view_window'><img src='images/more.png' alt=''/></a>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>" +
+                                                "<div class='clearfix'></div>" +
+                                                "</div>";
+                                        }
+                                        $(".s-grid-right .cricket .item").html(s_grid_small);
+                                    }, 'json');
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
         <div class="col-md-4 side-bar">
             <div class="first_half">
@@ -259,6 +384,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <p class="item">
                 </p>
             </div>
+            <div class="popular-news">
+                <header>
+                    <h3 class="title-popular">popular News</h3>
+                </header>
+                <div class="popular-grids">
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $.get("/aggregator/getNews",
+                        function (data) {
+                            var popular_grid = ""
+                            for (var i = 0; i < data.length; i++) {
+                                var title = data[i].title;
+                                var url = data[i].url;
+                                var img = data[i].image_url.split(",")[0];
+                                var time = data[i].create;
+                                popular_grid += "<div class='popular-grid'>" +
+                                    "<a href='" + url + "'><img src='" + img + "' alt='' style='height: 300px;'/></a>" +
+                                    "<a class='title' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                    "<p>" + time + "</p>" +
+                                    "</div>";
+                            }
+                            $(".popular-grids").html(popular_grid);
+                        }, 'json');
+                });
+            </script>
         </div>
         <div class="clearfix"></div>
     </div>
