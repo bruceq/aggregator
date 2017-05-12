@@ -16,5 +16,11 @@
     <sql id="Base_Column_List">
         id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url, keyword
     </sql>
-
+    <select id="selectAllByType" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM news
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            AND type LIKE '%${type}%'
+        </trim>
+        ORDER BY time DESC
+    </select>
 </mapper>

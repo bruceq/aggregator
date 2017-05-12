@@ -122,7 +122,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
         <script>
             $(document).ready(function () {
-                $.get("/aggregator/getNews",
+                $.post("/aggregator/getNews",
+                    {
+                        type: "首页"
+                    },
                     function (data) {
                         var move_text = "";
                         for (var i = 0; i < 2; i++) {
@@ -155,12 +158,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $.get("/aggregator/getNews",
+                    $.post("/aggregator/getNews",
+                        {
+                            type: "首页"
+                        },
                         function (data) {
                             var slider = "";
-                            for (var i = 0; i < data.length; i++) {
+                            for (var i = 0; i < 5; i++) {
                                 var title = data[i].title;
-                                var img = data[i].image_url.split(",")[0];
+                                var img = data[i].imageUrl.split(",")[0];
                                 var url = data[i].url
                                 slider += "<li>" +
                                     "<img src='" + img + "' class='callbacks_img'>" +
@@ -195,13 +201,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $.get("/aggregator/getNews",
+                    $.post("/aggregator/getNews",
+                        {
+                            type: "国际"
+                        },
                         function (data) {
                             var internation = ""
-                            for (var i = 0; i < data.length; i = i + 2) {
+                            for (var i = 0; i < 5; i = i + 2) {
                                 var title = data[i].title;
                                 var url = data[i].url;
-                                var img = data[i].image_url.split(",")[0];
+                                var img = data[i].imageUrl.split(",")[0];
                                 if (i % 2 == 0 && i < (data.length - 1)) {
                                     internation += "<div class='internation-style-grids'>" +
                                         "<div class='internation-style-left-grid'>" +
@@ -209,7 +218,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         "<a class='title' href='" + url + "' target='view_window'>" + title + "</a>" +
                                         "</div>" +
                                         "<div class='internation-style-right-grid'>" +
-                                        "<a href='" + data[i + 1].url + "' target='view_window'><img src='" + data[i + 1].image_url.split(",")[0] + "' alt=''  style='height: 300px;'/></a>" +
+                                        "<a href='" + data[i + 1].url + "' target='view_window'><img src='" + data[i + 1].imageUrl.split(",")[0] + "' alt=''  style='height: 300px;'/></a>" +
                                         "<a class='title' href='" + data[i + 1].url + "' target='view_window'>" + data[i + 1].title + "</a>" +
                                         "</div>" +
                                         "<div class='clearfix'></div></div>";
@@ -229,13 +238,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                $.get("/aggregator/getNews",
+                                $.post("/aggregator/getNews", {
+                                        type: "财经"
+                                    },
                                     function (data) {
                                         var c_sports_main = ""
                                         for (var i = 0; i < 1; i++) {
                                             var title = data[i].title;
                                             var url = data[i].url;
-                                            var img = data[i].image_url.split(",")[0];
+                                            var img = data[i].imageUrl.split(",")[0];
                                             var time = data[i].create;
                                             c_sports_main += " <div class='c-image'>" +
                                                 "<a href='" + url + "' target='view_window'><img  src='" + img + "' alt='' style='height: 150px;'/></a>" +
@@ -255,13 +266,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="item"></div>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                $.get("/aggregator/getNews",
+                                $.post("/aggregator/getNews", {
+                                        type: "财经"
+                                    },
                                     function (data) {
                                         var s_grid_small = ""
-                                        for (var i = 0; i < 3; i++) {
+                                        for (var i = 1; i < 4; i++) {
                                             var title = data[i].title;
                                             var url = data[i].url;
-                                            var img = data[i].image_url.split(",")[0];
+                                            var img = data[i].imageUrl.split(",")[0];
                                             var time = data[i].create;
                                             s_grid_small += "  <div class='s-grid-small'>" +
                                                 "<div class='sc-image'>" +
@@ -291,13 +304,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                $.get("/aggregator/getNews",
+                                $.post("/aggregator/getNews", {
+                                        type: "科技"
+                                    },
                                     function (data) {
                                         var c_sports_main = ""
                                         for (var i = 0; i < 1; i++) {
                                             var title = data[i].title;
                                             var url = data[i].url;
-                                            var img = data[i].image_url.split(",")[0];
+                                            var img = data[i].imageUrl.split(",")[0];
                                             var time = data[i].create;
                                             c_sports_main += " <div class='c-image'>" +
                                                 "<a href='" + url + "' target='view_window'><img  src='" + img + "' alt='' style='height: 150px;'/></a>" +
@@ -317,13 +332,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="item"></div>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                $.get("/aggregator/getNews",
+                                $.post("/aggregator/getNews", {
+                                        type: "科技"
+                                    },
                                     function (data) {
                                         var s_grid_small = ""
-                                        for (var i = 0; i < 3; i++) {
+                                        for (var i = 1; i < 4; i++) {
                                             var title = data[i].title;
                                             var url = data[i].url;
-                                            var img = data[i].image_url.split(",")[0];
+                                            var img = data[i].imageUrl.split(",")[0];
                                             var time = data[i].create;
                                             s_grid_small += "  <div class='s-grid-small'>" +
                                                 "<div class='sc-image'>" +
@@ -353,13 +370,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        $.get("/aggregator/getNews",
+                        $.post("/aggregator/getNews", {
+                                type: "军事"
+                            },
                             function (data) {
                                 var side_bar_article = ""
-                                for (var i = 0; i < data.length; i++) {
+                                for (var i = 0; i < 5; i++) {
                                     var title = data[i].title;
                                     var url = data[i].url;
-                                    var img = data[i].image_url.split(",")[0];
+                                    var img = data[i].imageUrl.split(",")[0];
                                     side_bar_article += "<div class='side-bar-article'>" +
                                         "<a href='" + url + "' target='view_window'><img src='" + img + "' alt='' style='height: 300px;'/></a>" +
                                         "<div class='side-bar-article-title'>" +
@@ -386,23 +405,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="popular-news">
                 <header>
-                    <h3 class="title-popular">popular News</h3>
+                    <h3 class="title-popular">政治</h3>
                 </header>
                 <div class="popular-grids">
                 </div>
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $.get("/aggregator/getNews",
+                    $.post("/aggregator/getNews",
+                        {
+                            type: "政治"
+                        },
                         function (data) {
                             var popular_grid = ""
-                            for (var i = 0; i < data.length; i++) {
+                            for (var i = 0; i < 5; i++) {
                                 var title = data[i].title;
                                 var url = data[i].url;
-                                var img = data[i].image_url.split(",")[0];
+                                var img = data[i].imageUrl.split(",")[0];
                                 var time = data[i].create;
                                 popular_grid += "<div class='popular-grid'>" +
-                                    "<a href='" + url + "'><img src='" + img + "' alt='' style='height: 300px;'/></a>" +
+                                    "<a href='" + url + "' target='view_window'><img src='" + img + "' alt='' style='height: 300px;'/></a>" +
                                     "<a class='title' href='" + url + "' target='view_window'>" + title + "</a>" +
                                     "<p>" + time + "</p>" +
                                     "</div>";
@@ -502,17 +524,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $.get("/aggregator/getNews",
+        $.post("/aggregator/getNews",
+            {
+                type: "首页"
+            },
             function (data) {
                 var article = "";
                 var keywords = "";
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 5; i < 10; i++) {
                     var title = data[i].title;
                     var content = data[i].content.substr(0, 100) + "...";
                     var type = data[i].type;
                     var time = data[i].create;
                     var url = data[i].url;
-                    var img = data[i].image_url.split(",")[0];
+                    var img = data[i].imageUrl.split(",")[0];
                     for (var j = 0; j < data[i].keyword.split(" ").length; j++) {
                         var keyword = data[i].keyword.split(" ")[j];
                         if ("" != keyword) {

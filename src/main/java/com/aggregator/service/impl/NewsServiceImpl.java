@@ -7,6 +7,7 @@ import com.aggregator.service.NewsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Bruce_Q
@@ -16,4 +17,9 @@ import javax.annotation.Resource;
 public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsService {
     @Resource
     NewsMapper newsMapper;
+
+    @Override
+    public List<News> selectAllByType(String type) {
+        return newsMapper.selectAllByType(type);
+    }
 }

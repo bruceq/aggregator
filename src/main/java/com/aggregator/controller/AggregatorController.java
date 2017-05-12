@@ -6,6 +6,7 @@ import com.aggregator.model.News;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import us.codecraft.webmagic.Spider;
 
@@ -30,6 +31,11 @@ public class AggregatorController extends AggregatorBaseController {
     public void test() {
         Spider.create(new GuanchaProcessor())
                 .addUrl("http://www.guancha.cn/")
+                .addUrl("http://www.guancha.cn/internation")
+                .addUrl("http://www.guancha.cn/economy")
+                .addUrl("http://www.guancha.cn/industry-science")
+                .addUrl("http://www.guancha.cn/politics")
+                .addUrl("http://www.guancha.cn/military-affairs")
                 .thread(5)
                 .addPipeline(mysqlPipeline)
                 .run();
@@ -41,13 +47,11 @@ public class AggregatorController extends AggregatorBaseController {
      * @return newsList（新闻集合）
      */
     @RequestMapping(value = "/getNews", method = {RequestMethod.POST, RequestMethod.GET})
-    public List<News> getNews() {
+    public List<News> getNews(@RequestParam(required = false) String type) {
         List<News> newsList = new ArrayList<>();
-        List<News> newss = newsService.selectAll();
-        Random random = new Random();
-        for (int i = 0; i < 5; i++) {
-            Integer index = random.nextInt(newsService.selectAll().size()) - 1;
-            newsList.add(newss.get(index));
+        List<News> newss = newsService.selectAllByType(type);
+        for (int i = 0; i < 10; i++) {
+            newsList.add(newss.get(i));
         }
         return newsList;
     }

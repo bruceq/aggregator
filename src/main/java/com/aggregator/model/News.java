@@ -35,10 +35,10 @@ public class News {
     private String time;
 
     //是否含有图片（没有0，有1）
-    private String image_url;
+    private String imageUrl;
 
     //是否含有相关链接（没有0，有1）
-    private Integer link_flag;
+    private Integer linkFlag;
 
     //url地址
     private String url;
@@ -94,20 +94,20 @@ public class News {
         this.time = time;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public Integer getLink_flag() {
-        return link_flag;
+    public Integer getLinkFlag() {
+        return linkFlag;
     }
 
-    public void setLink_flag(Integer link_flag) {
-        this.link_flag = link_flag;
+    public void setLinkFlag(Integer linkFlag) {
+        this.linkFlag = linkFlag;
     }
 
     public String getUrl() {

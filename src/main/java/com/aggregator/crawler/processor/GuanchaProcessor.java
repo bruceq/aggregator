@@ -3,6 +3,7 @@ package com.aggregator.crawler.processor;
 import com.aggregator.crawler.pipeine.MysqlPipeline;
 import com.aggregator.model.News;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -20,9 +21,40 @@ public class GuanchaProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        if (page.getRequest().getUrl().matches("http://www.guancha.cn/")) {
+        if (page.getRequest().getUrl().startsWith("http://www.guancha.cn/") && !page.getRequest().getUrl().endsWith("shtml")) {
             List<String> urls = page.getHtml().xpath("//h4[@class='module-title']/a/@href").all();
-            page.addTargetRequests(urls);
+            for (String url : urls) {
+                if (page.getRequest().getUrl().matches("http://www.guancha.cn/")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "首页");
+                    page.addTargetRequest(request);
+                }
+                if (page.getRequest().getUrl().contains("politics")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "政治");
+                    page.addTargetRequest(request);
+                }
+                if (page.getRequest().getUrl().contains("internation")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "国际");
+                    page.addTargetRequest(request);
+                }
+                if (page.getRequest().getUrl().contains("economy")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "财经");
+                    page.addTargetRequest(request);
+                }
+                if (page.getRequest().getUrl().contains("industry-science")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "科技");
+                    page.addTargetRequest(request);
+                }
+                if (page.getRequest().getUrl().contains("military-affairs")) {
+                    Request request = new Request(url);
+                    request.putExtra("type", "军事");
+                    page.addTargetRequest(request);
+                }
+            }
         } else {
             //正文&标题
             String title = "" + page.getHtml().getDocument().title().replace("'", "");
@@ -46,7 +78,7 @@ public class GuanchaProcessor implements PageProcessor {
             page.putField("url", url);
 
             //类型
-            String type = "" + page.getHtml().xpath("div[@class='crumbs']/a/text()").all().get(1);
+            String type = "" + page.getRequest().getExtra("type");
             page.putField("type", type);
 
             //关键字
@@ -87,10 +119,10 @@ public class GuanchaProcessor implements PageProcessor {
             news.setCreate(create);
             news.setType(type);
             news.setUrl(url);
-            news.setLink_flag(link_flag);
-            news.setImage_url(img_url.toString());
+            news.setLinkFlag(link_flag);
+            news.setImageUrl(img_url.toString());
             news.setKeyword(keywords.toString());
-            if (null != img_url.toString() && "" != img_url.toString()) {
+            if (!"".equals(img_url.toString())) {
                 page.putField("news", news);
             }
         }
@@ -105,7 +137,7 @@ public class GuanchaProcessor implements PageProcessor {
     public static void main(String[] args) {
         Spider.create(new GuanchaProcessor())
 //                .addUrl("http://www.guancha.cn/")
-                .addUrl("http://www.guancha.cn/WangXiangSui/2017_05_09_407337.shtml")
+                .addUrl("http://www.guancha.cn/politics/2017_05_11_407886.shtml")
 //                .addUrl("http://www.guancha.cn/local/2017_05_05_406844.shtml")
 //                .addPipeline(new ConsolePipeline())
                 .addPipeline(new MysqlPipeline())
