@@ -8,6 +8,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Bruce_Q
@@ -20,9 +21,19 @@ public class MysqlPipeline implements Pipeline {
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        News news = resultItems.get("news");
-        if (null != news) {
-            newsService.insert(news);
+        if (null != resultItems.get("news")) {
+            News news = resultItems.get("news");
+            if (null != news) {
+                newsService.insert(news);
+            }
+        }
+        if (null != resultItems.get("newsList")) {
+            List<News> newsList = resultItems.get("newsList");
+            for (News news : newsList) {
+                if (null != news) {
+                    newsService.insert(news);
+                }
+            }
         }
     }
 }

@@ -11,5 +11,5 @@ import java.util.List;
  * @create 2017-05-05 16:21
  **/
 public interface NewsService extends BaseService<News> {
-    List<News> selectAllByType(@Param("type") String type);
+    List<News> selectAllByType(@Param("type") String type, @Param("source") String source);
 }

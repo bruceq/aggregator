@@ -122,6 +122,7 @@ public class GuanchaProcessor implements PageProcessor {
             news.setLinkFlag(link_flag);
             news.setImageUrl(img_url.toString());
             news.setKeyword(keywords.toString());
+            news.setSource("观察者网");
             if (!"".equals(img_url.toString())) {
                 page.putField("news", news);
             }
@@ -136,10 +137,7 @@ public class GuanchaProcessor implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new GuanchaProcessor())
-//                .addUrl("http://www.guancha.cn/")
                 .addUrl("http://www.guancha.cn/politics/2017_05_11_407886.shtml")
-//                .addUrl("http://www.guancha.cn/local/2017_05_05_406844.shtml")
-//                .addPipeline(new ConsolePipeline())
                 .addPipeline(new MysqlPipeline())
                 .start();
     }

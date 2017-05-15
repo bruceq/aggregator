@@ -46,6 +46,9 @@ public class News {
     //关键字
     private String keyword;
 
+    //关键字
+    private String source;
+
     public Long getId() {
         return id;
     }
@@ -124,5 +127,13 @@ public class News {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

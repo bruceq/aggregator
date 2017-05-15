@@ -19,7 +19,7 @@ public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsServic
     NewsMapper newsMapper;
 
     @Override
-    public List<News> selectAllByType(String type) {
-        return newsMapper.selectAllByType(type);
+    public List<News> selectAllByType(String type, String source) {
+        return newsMapper.selectAllByType(type, source);
     }
 }

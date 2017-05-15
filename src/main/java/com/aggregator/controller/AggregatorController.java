@@ -2,8 +2,8 @@ package com.aggregator.controller;
 
 import com.aggregator.base.AggregatorBaseController;
 import com.aggregator.crawler.processor.GuanchaProcessor;
+import com.aggregator.crawler.processor.NetEaseProcessor;
 import com.aggregator.model.News;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +12,6 @@ import us.codecraft.webmagic.Spider;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * videoIn搜索功能
@@ -27,7 +26,7 @@ public class AggregatorController extends AggregatorBaseController {
     /**
      * 测试接口，爬取【观察网】新闻
      */
-    @RequestMapping(value = "/test", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/crawler", method = {RequestMethod.POST, RequestMethod.GET})
     public void test() {
         Spider.create(new GuanchaProcessor())
                 .addUrl("http://www.guancha.cn/")
@@ -38,7 +37,17 @@ public class AggregatorController extends AggregatorBaseController {
                 .addUrl("http://www.guancha.cn/military-affairs")
                 .thread(5)
                 .addPipeline(mysqlPipeline)
-                .run();
+                .start();
+        Spider.create(new NetEaseProcessor())
+                .addUrl("http://temp.163.com/special/00804KVA/cm_guoji.js?callback=data_callback")
+                .addUrl("http://temp.163.com/special/00804KVA/cm_guonei.js?callback=data_callback")
+                .addUrl("http://temp.163.com/special/00804KVA/cm_shehui.js?callback=data_callback")
+                .addUrl("http://temp.163.com/special/00804KVA/cm_war.js?callback=data_callback")
+                .addUrl("http://tech.163.com/special/00097UHL/tech_datalist.js?callback=data_callback")
+                .addUrl("http://money.163.com/special/002557S5/newsdata_idx_index.js?callback=data_callback")
+                .thread(5)
+                .addPipeline(mysqlPipeline)
+                .start();
     }
 
     /**
@@ -49,11 +58,27 @@ public class AggregatorController extends AggregatorBaseController {
     @RequestMapping(value = "/getNews", method = {RequestMethod.POST, RequestMethod.GET})
     public List<News> getNews(@RequestParam(required = false) String type) {
         List<News> newsList = new ArrayList<>();
-        List<News> newss = newsService.selectAllByType(type);
+        List<News> newss = newsService.selectAllByType(type, "观察者网");
         for (int i = 0; i < 10; i++) {
             newsList.add(newss.get(i));
         }
         return newsList;
     }
+
+    /**
+     * 获取数据库新闻内容
+     *
+     * @return newsList（新闻集合）
+     */
+    @RequestMapping(value = "/getWangyi", method = {RequestMethod.POST, RequestMethod.GET})
+    public List<News> getWangyi(@RequestParam(required = false) String type) {
+        List<News> newsList = new ArrayList<>();
+        List<News> newss = newsService.selectAllByType(type, "网易新闻");
+        for (int i = 0; i < 10; i++) {
+            newsList.add(newss.get(i));
+        }
+        return newsList;
+    }
+
 
 }

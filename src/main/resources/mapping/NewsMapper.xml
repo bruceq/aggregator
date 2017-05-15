@@ -12,15 +12,19 @@
         <result column="link_flag" property="linkFlag" jdbcType="BIGINT"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="keyword" property="keyword" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url, keyword
+        id, title, author, type, content, time, image_url AS imageUrl, link_flag AS linkFlag, url, keyword, source
     </sql>
     <select id="selectAllByType" parameterType="map" resultMap="BaseResultMap">
         SELECT * FROM news
         <trim prefix="WHERE" prefixOverrides="AND |OR">
             AND type LIKE '%${type}%'
         </trim>
+        <if test="source != null">
+            and source LIKE '%${source}%'
+        </if>
         ORDER BY time DESC
     </select>
 </mapper>
