@@ -10,7 +10,7 @@ $(document).ready(function () {
             var slider = "";
             for (var i = 5; i < 10; i++) {
                 var title = data[i].title;
-                var content = ""/*data[i].content.substr(0, 100) + "..."*/;
+                var content = data[i].content.substr(0, 100) + "...";
                 var type = data[i].type;
                 var time = data[i].create;
                 var url = data[i].url;

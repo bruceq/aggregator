@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_bruce
 Source Server Version : 50710
 Source Host           : localhost:3306
 Source Database       : aggregator
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2017-05-07 14:41:49
+Date: 2017-05-16 17:01:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,6 @@ CREATE TABLE `news` (
   `link_flag` int(11) DEFAULT NULL COMMENT '是否含有相关链接（没有0，有1）',
   `url` text COMMENT 'url地址',
   `keyword` text COMMENT '关键字',
-  `extro_2` text COMMENT '备用字段2',
+  `source` text COMMENT '来源',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=705 DEFAULT CHARSET=utf8;
