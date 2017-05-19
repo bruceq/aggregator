@@ -3,6 +3,7 @@ package com.aggregator.controller;
 import com.aggregator.base.AggregatorBaseController;
 import com.aggregator.crawler.processor.GuanchaProcessor;
 import com.aggregator.crawler.processor.NetEaseProcessor;
+import com.aggregator.crawler.processor.qq.QQProcessor;
 import com.aggregator.model.News;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,10 +49,20 @@ public class AggregatorController extends AggregatorBaseController {
                 .thread(5)
                 .addPipeline(mysqlPipeline)
                 .start();
+        Spider.create(new QQProcessor())
+                .addUrl("http://news.qq.com/world_index.shtml")
+                .addUrl("http://society.qq.com")
+                .addUrl("http://mil.qq.com/mil_index.htm")
+                .addUrl("http://tech.qq.com")
+                .addUrl("http://ent.qq.com")
+                .addUrl("http://finance.qq.com")
+                .thread(5)
+                .addPipeline(mysqlPipeline)
+                .start();
     }
 
     /**
-     * 获取数据库新闻内容
+     * 获取观察者网新闻内容
      *
      * @return newsList（新闻集合）
      */
@@ -66,7 +77,7 @@ public class AggregatorController extends AggregatorBaseController {
     }
 
     /**
-     * 获取数据库新闻内容
+     * 获取网易新闻内容
      *
      * @return newsList（新闻集合）
      */
@@ -80,5 +91,19 @@ public class AggregatorController extends AggregatorBaseController {
         return newsList;
     }
 
+    /**
+     * 获取腾讯新闻内容
+     *
+     * @return newsList（新闻集合）
+     */
+    @RequestMapping(value = "/getQQ", method = {RequestMethod.POST, RequestMethod.GET})
+    public List<News> getQQ(@RequestParam(required = false) String type) {
+        List<News> newsList = new ArrayList<>();
+        List<News> newss = newsService.selectAllByType(type, "腾讯新闻");
+        for (int i = 0; i < 10; i++) {
+            newsList.add(newss.get(i));
+        }
+        return newsList;
+    }
 
 }
