@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * videoIn搜索功能
+ * 新闻聚合平台控制器
  *
  * @author Bruce_Q
  * @create 2017-03-29 16:59
@@ -23,7 +23,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/aggregator/")
 public class AggregatorController extends AggregatorBaseController {
-
     /**
      * 测试接口，爬取【观察网】新闻
      */
@@ -92,7 +91,7 @@ public class AggregatorController extends AggregatorBaseController {
     }
 
     /**
-     * 获取腾讯新闻内容
+         * 获取腾讯新闻内容
      *
      * @return newsList（新闻集合）
      */
@@ -105,5 +104,18 @@ public class AggregatorController extends AggregatorBaseController {
         }
         return newsList;
     }
+
+    /**
+     * 搜索功能
+     *
+     * @return newsList（新闻集合）
+     */
+    @RequestMapping(value = "/search", method = {RequestMethod.POST, RequestMethod.GET})
+    public List<News> search(@RequestParam(required = false) String title) {
+        List<News> newss = newsService.selectAllByTitle(title);
+        return newss;
+    }
+
+
 
 }

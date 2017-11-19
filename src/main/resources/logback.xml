@@ -45,7 +45,8 @@
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>
-                ../logs/${CONTEXT_NAME}/info/${HOSTNAME}.${CONTEXT_NAME}.%d{yyyy-MM-dd-HH}.info.log
+                ../logs/${CONTEXT_NAME}/info/${HOSTNAME}.${CONTEXT_NAME}.%d{yyyy-MM-dd-HH}/${log.name:-main.log}
+                <!--../logs/${CONTEXT_NAME}/info/${log.name}-->
             </FileNamePattern>
         </rollingPolicy>
         <encoder>
@@ -53,6 +54,26 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+
+
+    <!--<appender name="logfile_info" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--<level>INFO</level>-->
+    <!--<onMatch>ACCEPT</onMatch>-->
+    <!--<onMismatch>DENY</onMismatch>-->
+    <!--</filter>-->
+    <!--<Prudent>true</Prudent>-->
+    <!--&lt;!&ndash;<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">&ndash;&gt;-->
+    <!--<FileNamePattern>-->
+    <!--&lt;!&ndash;../logs/${CONTEXT_NAME}/info/${HOSTNAME}.${CONTEXT_NAME}.%d{yyyy-MM-dd-HH}.info.log&ndash;&gt;-->
+    <!--../logs/${CONTEXT_NAME}/info/${log.name}-->
+    <!--</FileNamePattern>-->
+    <!--&lt;!&ndash;</rollingPolicy>&ndash;&gt;-->
+    <!--<encoder>-->
+    <!--<pattern>${FILE_LOG_PATTERN}</pattern>-->
+    <!--<charset>UTF-8</charset>-->
+    <!--</encoder>-->
+    <!--</appender>-->
 
     <appender name="logfile_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -73,6 +94,12 @@
     <logger name="root" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="logfile_info"/>
+    </logger>
+    <logger name="com.aggregator" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="logfile_debug" />-->
+        <appender-ref ref="logfile_info"/>
+        <appender-ref ref="logfile_error"/>
     </logger>
     <logger name="com.aggregator" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>

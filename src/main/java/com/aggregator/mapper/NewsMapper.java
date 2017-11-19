@@ -12,4 +12,6 @@ import java.util.List;
  **/
 public interface NewsMapper extends Mapper<News> {
     List<News> selectAllByType(@Param("type") String type, @Param("source") String source);
+
+    List<News> selectAllByTitle(@Param("title") String title);
 }

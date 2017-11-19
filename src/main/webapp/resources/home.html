@@ -83,10 +83,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!-- start search-->
                             <div class="search-box">
                                 <div id="sb-search" class="sb-search">
-                                    <form>
+                                    <form name="search">
                                         <input class="sb-search-input" placeholder="Enter your search term..."
                                                type="search" name="search" id="search">
-                                        <input class="sb-search-submit" type="submit" value="">
+                                        <input class="   " type="submit" value="" onclick="print()">
                                         <span class="sb-icon-search"> </span>
                                     </form>
                                 </div>
@@ -95,7 +95,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <script src="js/classie.js"></script>
                             <script src="js/uisearch.js"></script>
                             <script>
-                                new UISearch(document.getElementById('sb-search'));
+                                var search111 = new UISearch(document.getElementById('sb-search'));
+                                function print() {
+                                    var a = search.search.value;
+                                    alert(a);
+                                    $(document).onclick("print()", function () {
+                                        $.post("/aggregator/getNews",
+                                            {
+                                                type: "财经"
+                                            },
+                                            function (data) {
+                                                var c_sports_main = ""
+                                                for (var i = 0; i < 1; i++) {
+                                                    var title = data[i].title;
+                                                    var url = data[i].url;
+                                                    var img = data[i].imageUrl.split(",")[0];
+                                                    var time = data[i].create;
+                                                    c_sports_main += " <div class='c-image'>" +
+                                                        "<a href='" + url + "' target='view_window'><img  src='" + img + "' alt='' style='height: 150px;'/></a>" +
+                                                        "</div>" +
+                                                        "<div class='c-text'>" +
+                                                        "<a class='power' href='" + url + "' target='view_window'>" + title + "</a>" +
+                                                        "<p class='date'>" + time + "</p>" +
+                                                        "<a class='reu' href='" + url + "' target='view_window'><img src='images/more.png' alt=''/></a>" +
+                                                        "<div class='clearfix'></div>" +
+                                                        "</div>" +
+                                                        "<div class='clearfix'></div>";
+                                                }
+                                                $(".s-grid-left .cricket .c-sports-main").html(c_sports_main);
+                                            }, 'json');
+                                    });
+                                }
                             </script>
                             <!-- //search-scripts -->
                         </div>

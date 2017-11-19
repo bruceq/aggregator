@@ -27,4 +27,11 @@
         </if>
         ORDER BY time DESC
     </select>
+    <select id="selectAllByTitle" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM news
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            AND title LIKE '%${title}%'
+        </trim>
+        ORDER BY time DESC
+    </select>
 </mapper>
